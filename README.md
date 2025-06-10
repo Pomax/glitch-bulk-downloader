@@ -22,18 +22,6 @@ Project hosting will shut down in July, but you will continue to be able to down
 
 You will need Python 3 installed. If you're on linux or macos, this will almost certainly already be the case, and you should be able to use `python3` without installing anything. On Windows, you may need to go to the Windows Store, find Python, and install it first. This will add the `python` command (note that on Windows there is no "3" at the end). Alternatively, you can visit https://www.python.org/downloads/windows/ and download the installer for the current version of Python 3 that's appropriate to your Windows version.
 
-### 2. You will also want `tar`
-
-In order to unpack your projects and put them in properly named subfolders, you will need the `tar` command to be available. If you're on Linux or MacOS, you're (again) already good to go, but if you're on Windows you will need to "install" `tar`.
-
-#### installing `tar` on Windows
-
-If you use `git`, the easiest way to install `tar` is to just run the windows git installer, and tell it to install the GNU tools. After that finishes you should be able to confirm `tar` is available by opening a command prompt or powershell and just running `tar --help`.
-
-If you don't, you can also exclusively install `tar` by heading over to https://gnuwin32.sourceforge.net/packages/gtar.htm and clicking on the binary setup link. This will take you to a Sourceforge (the place to be for open source before GitHub showed up) download page, which should automatically download the setup program.
-
-Run the setup, and then you'll need to update your windows PATH to include the `C:\Program Files (x86)\GnuWin32\bin` folder: you can either do this persistently (instructions are easily found on the web for that), or you can run `set PATH=%PATH%;"C:\Program Files (x86)\GnuWin32\bin"` in your command prompt or powershell before you run the download script.
-
 ---
 
 ## How to use the script
@@ -73,10 +61,12 @@ In which case the script won't ask for anything and will just get to downloading
 
 ### Optional runtime flags
 
-The script supports two runtime flags, with flags needing to come after your user id and token:
+The script supports four runtime flags, with flags needing to come after your user id and token:
 
-1. `--no_assets`, which will make the script download your project, but not download the associated assets, and
+1. `--no_assets`, which will make the script download your project, but not download the associated assets.
 2. `--no-skip`, which will make the script re-download any projects you already downloaded if you run it more than once.
+3. `--no_unpack`, which will make the script skip unpacking the project archives.
+4. `--keep_archives`, which will prevent the script from deleting archives after unpacking.
 
 ## Replacing CDN URLs in your source code
 
