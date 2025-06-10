@@ -11,6 +11,7 @@ import sys, os, shutil, json, subprocess
 from http.client import InvalidURL
 from urllib.request import Request, urlopen, urlretrieve, URLError
 from urllib.parse import quote, unquote
+import ssl
 from time import time, sleep
 
 print("\nWelcome to the Glitch.com bulk project downloader.")
@@ -41,6 +42,7 @@ except:
 args = sys.argv
 no_assets = "--no-assets" in args
 no_skip = "--no-skip" in args
+force_assets = "--force-assets" in args
 
 def get_values():
     """
@@ -170,6 +172,12 @@ def download_assets(project_title, project_type):
                     assets[uuid] = record
     except Exception as e:
         print(f"glitch-assets error for {project_title}: {e}")
+    
+    if force_assets:
+        # Allow invalid SSL certificates
+        default_context = ssl._create_default_https_context
+        ssl._create_default_https_context = ssl._create_unverified_context
+    
     for entry in  [x for x in assets.values() if x is not False]:
         # Do a bit of URL hackery because there's a surprising number
         # of bad URLs in people's glitch assets files...
@@ -185,6 +193,10 @@ def download_assets(project_title, project_type):
             print(f"bad url: {e}")
         except InvalidURL as e:
             print(f"invalid url: {e}")
+    
+    if force_assets:
+        # Restore original HTTPS context
+        ssl._create_default_https_context = default_context
 
 
 """
