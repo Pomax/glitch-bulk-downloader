@@ -15,6 +15,9 @@ from time import time, sleep
 
 print("\nWelcome to the Glitch.com bulk project downloader.")
 
+# List to store failed downloads
+failed_downloads = []
+
 # Verify that we have tar available, otherwise thing
 bypass_tar = False
 try:
@@ -120,7 +123,12 @@ def download_project(user_token, project, project_type="active"):
     url = f"https://api.glitch.com/project/download/?authorization={user_token}&projectId={project_id}"
     file = f"./{project_title}.tgz"
     print(f"\nDownloading '{project_title}'...")
-    result = urlretrieve(url, file)
+    try:
+        result = urlretrieve(url, file)
+    except Exception as e:
+        print(f"Failed to download {project_title}: {e}")
+        failed_downloads.append(project_title)
+        return
     if bypass_tar is False:
         print("Unpacking...")
         unpacked_dir = './app'
@@ -215,6 +223,11 @@ except KeyboardInterrupt:
 print("")
 print("*** Finished downloading all your projects ***")
 print("")
+if failed_downloads:
+    print("The following projects could not be downloaded:")
+    for title in failed_downloads:
+        print(f" - {title}")
+    print("")
 print("NOTE: asset URLs were not automatically replaced in any source")
 print("      code, so you will still need to replace CDN URLs in your")
 print("      code with relative links to the ./glitch-assets directory.")
