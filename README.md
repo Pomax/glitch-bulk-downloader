@@ -2,7 +2,7 @@
 
 # How to bulk-download all your pojects
 
-With the [project hosting shutdown](https://support.glitch.com/t/discussion-thread-project-hosting-ending-july-8/75660) in July, many of you have asked for a way to bulk-download your projects: this thread is for you.
+With the [project hosting shutdown](https://support.glitch.com/t/discussion-thread-project-hosting-ending-july-8/75660) in July of 2025, many of you have asked for a way to bulk-download your projects: this thread is for you.
 
 We've created a python script that you can run that will download all your projects, and also download all your assets from the asset manager into a `glitch-assets` folder for each project.
 
