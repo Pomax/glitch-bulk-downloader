@@ -42,8 +42,6 @@ The script will download your regular projects into an `./active` folder, and wi
 
 ### Interactive mode
 
-### Interactive mode
-
 You can invoke the script by calling:
 
 ```
