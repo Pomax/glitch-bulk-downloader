@@ -10,7 +10,7 @@ We've created a python script that you can run that will download all your proje
 
 ## How long do I have?!
 
-Project hosting will shut down in July, but you will continue to be able to download your projects for the entirety of 2025. So you have some time yet.
+Project hosting was shut down in July of 2025, and you have until the end of the year to download all your projects.
 
 ## Where to get it
 
