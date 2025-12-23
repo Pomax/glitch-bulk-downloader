@@ -80,6 +80,16 @@ The script supports two runtime flags, with flags needing to come after your use
 
 Asset URLs are not automatically replaced in any source code, mostly because that's much harder than you'd think it'd be, so you will still need to replace CDN URLs in your code with relative links to the `./glitch-assets` folder that all your project's assets were downloaded into.
 
+### Replacing CDN URLs With Regex
+
+You can use regular expression to easily replace many CDN urls at once. Either with regex101 online at https://regex101.com or in your IDE with find and replace.
+
+**Find:** `https:\/\/cdn\.glitch\.global\/.{36}\/([a-zA-Z0-9_-]*\.[a-zA-Z0-9]+).*`
+
+**Replace:** `glitch-assets/$1"`
+
+**WARNING:** If your filenames contain spaces or special characters, they may appear as URL encoding like `%20` (space), `%28` (opening parenthesis), etc. After running the regex replacement, you may need to manually decode these or do a second find-replace for `%20` → ` ` (space)
+
 ---
 
 ## Known issues
