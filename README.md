@@ -38,9 +38,12 @@ Run the setup, and then you'll need to update your windows PATH to include the `
 
 ## How to use the script
 
-The script will download your regular projects into an `./active` folder, and will download all your archived projects into an `./archived` folder. It can do this in two "modes":
+The script will download your regular projects into an `./active` folder, and will download all your archived projects into an `./archived` folder.
 
-### Interactive mode
+It will now also save your project metadata (description, stats, etc) as a JSON file alongside the project folder.
+If you have previously run this script before this feature was added, you can re-run the script in the same directory and it will fill in the metadata files without re-downloading the projects.
+
+The script can download in two "modes":
 
 You can invoke the script by calling:
 

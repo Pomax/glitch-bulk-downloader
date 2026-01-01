@@ -110,14 +110,24 @@ def download_project(user_token, project, project_type="active"):
     project_id = project.get("id")
     project_title = project.get("domain", project_id)
     base_path = f"./{project_type}/{project_title}"
+    json_path = f"{base_path}.json"
+
+    if not os.path.exists(project_type):
+        os.mkdir(f"./{project_type}")
+
+    # Check this before skipping, so we can backfill existing downloads
+    if not os.path.exists(json_path):
+        print(f"Saving project JSON for {project_title}...")
+        with open(json_path, "w") as outfile:
+            outfile.write(json.dumps(project, indent=2))
+
     if os.path.exists(base_path):
         if not no_skip:
             print(f"Skipping {project_title} (already downloaded)")
             return
         else:
             shutil.rmtree(base_path, ignore_errors=False, onerror=None)
-    if not os.path.exists(project_type):
-        os.mkdir(f"./{project_type}")
+
     url = f"https://api.glitch.com/project/download/?authorization={user_token}&projectId={project_id}"
     file = f"./{project_title}.tgz"
     print(f"\nDownloading '{project_title}'...")
