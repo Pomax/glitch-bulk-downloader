@@ -43,10 +43,14 @@ args = sys.argv
 no_assets = "--no-assets" in args
 no_skip = "--no-skip" in args
 
-def get_values():
+def get_values(args):
     """
     Ask for user credentials, unless they were already provided on the command line
     """
+
+    # We've already processed optional args above, so remove them if present
+    args = [a for a in args if not a.startswith('--')]
+
     if len(args) > 1:
         user_id = args[1]
     else:
@@ -196,7 +200,7 @@ Let's get this bulk download going:
 """
 
 try:
-    (user_id, user_token) = get_values()
+    (user_id, user_token) = get_values(args)
 
     print("Fetching list of active projects...")
     data = get_project_list(user_id, user_token, False)
