@@ -177,8 +177,14 @@ def download_assets(project_title, project_type):
     for entry in  [x for x in assets.values() if x is not False]:
         # Do a bit of URL hackery because there's a surprising number
         # of bad URLs in people's glitch assets files...
-        name = entry["name"]
         url = entry["url"].replace("%3A", ":").replace("%2F", "/").replace(" ", "%20")
+        if "name" in entry:
+            name = entry["name"]
+        else:
+            # Some assets ended up without a name somehow, so fall back to URL filename
+            # We already have to undo any escaping above, so a simple split suffices here
+            name = url.split("/")[-1]
+
         dest = f"{dir}/{name}"
         print(f"Downloading {name} from {url}...")
         try:
