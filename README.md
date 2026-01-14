@@ -80,6 +80,32 @@ The script supports two runtime flags, with flags needing to come after your use
 
 Asset URLs are not automatically replaced in any source code, mostly because that's much harder than you'd think it'd be, so you will still need to replace CDN URLs in your code with relative links to the `./glitch-assets` folder that all your project's assets were downloaded into.
 
+If you prefer, you can run the `migrate.mjs` script included in this repository. It uploads all assets in `.glitch-assets` to your Cloudflare R2 bucket and then rewrites every reference to the old CDN URLs in your project files with the new URLs.
+
+### Using migrate.mjs
+
+1. Install the required packages:
+
+   ```bash
+   npm install @aws-sdk/client-s3 node-fetch dotenv
+   ```
+
+2. Create a `.env` file in the same folder as `migrate.mjs` and set these variables:
+
+   ```
+   R2_ACCESS_KEY_ID=your-access-key
+   R2_SECRET_ACCESS_KEY=your-secret-key
+   R2_ACCOUNT_ID=your-account-id
+   R2_BUCKET_NAME=your-bucket
+   R2_PUBLIC_URL=https://your-public-bucket-url
+   ```
+
+3. Run the script from your project directory:
+
+   ```bash
+   node migrate.mjs
+   ```
+
 ---
 
 ## Known issues
