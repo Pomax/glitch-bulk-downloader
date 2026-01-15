@@ -73,8 +73,9 @@ In which case the script won't ask for anything and will just get to downloading
 
 The script supports two runtime flags, with flags needing to come after your user id and token:
 
-1. `--no_assets`, which will make the script download your project, but not download the associated assets, and
+1. `--no-assets`, which will make the script download your project, but not download the associated assets, and
 2. `--no-skip`, which will make the script re-download any projects you already downloaded if you run it more than once.
+2. `--no-verify-assets`, which will disable SSL verification when downloading assets (this is less secure, see [Known issues](#known-issues) below!)
 
 ## Replacing CDN URLs in your source code
 
@@ -86,7 +87,7 @@ Asset URLs are not automatically replaced in any source code, mostly because tha
 
 While this script will download your projects _and_ their associated assets, some assets may be on a very old CDN that currently has an expired certificate, so Python will refuse to download those assets out of security concerns (note that if your project's 8 years old, that might affect you. If not, it probably won't).
 
-We're looking into updating that certificate, but if enough folks run into this we can also add a flag to the download script to bypass security for those assets for folks who think that's an acceptable risk.
+We're looking into updating that certificate, but in the meantime you can use the `--no-verify-assets` flag to bypass certificate verification entirely for those assets if you think that's an acceptable risk.
 
 ## Questions or comments
 
